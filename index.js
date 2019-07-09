@@ -2,19 +2,19 @@
  * @providesModule RNShake
  * @flow
  */
-'use strict';
+"use strict";
 
-import React, { DeviceEventEmitter, NativeModules } from 'react-native';
-import invariant from 'invariant';
+import { DeviceEventEmitter } from "react-native";
+import invariant from "invariant";
 
 var listener;
 class RNShake {
   static addEventListener(type: string, handler: Function) {
     invariant(
-      type === 'ShakeEvent',
-      'RNShake only supports `ShakeEvent` event'
+      type === "ShakeEvent",
+      "RNShake only supports `ShakeEvent` event"
     );
-    listener = DeviceEventEmitter.addListener('ShakeEvent', () => {
+    listener = DeviceEventEmitter.addListener("ShakeEvent", () => {
       if (handler) {
         handler();
       }
@@ -22,17 +22,15 @@ class RNShake {
   }
   static removeEventListener(type: string, handler: Function) {
     invariant(
-      type === 'ShakeEvent',
-      'RNShake only supports `ShakeEvent` event'
+      type === "ShakeEvent",
+      "RNShake only supports `ShakeEvent` event"
     );
     if (!listener) {
       return;
     }
-    if (handler) {
-      handler();
-    }
+
     listener.remove();
   }
-};
+}
 
 module.exports = RNShake;
